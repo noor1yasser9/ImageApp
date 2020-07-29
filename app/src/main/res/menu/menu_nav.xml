@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/imagesFragment"
+        android:icon="@drawable/ic_image_selector"
+        android:title="Images" />
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search_select"
+        android:title="Chat" />
+
+
+    <item
+        android:id="@+id/favoriteFragment"
+        android:icon="@drawable/ic_favorite_selector"
+        android:title="Favorite" />
+
+    <item
+        android:id="@+id/videoFragment"
+        android:icon="@drawable/ic_video_selector"
+        android:title="Video" />
+</menu>

@@ -1,0 +1,37 @@
+<resources>
+    <!-- Base application theme. -->
+    <!-- Light/Day Mode Theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="colorCard">#212121</item>
+        <item name="colorPrimary">#121300</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColor">#303030</item>
+        <item name="cardBackgroundColor">#424242</item>
+        <item name="indicatorColor">#133033</item>
+        <item name="textColor">#ffffff</item>
+        <item name="tintColor">#A3A3A3</item>
+        <item name="buttonColor">#2196f3</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <!-- Night/Dark Mode Theme -->
+    <style name="darktheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="colorPrimary">#E3E3E3</item>
+        <item name="colorPrimaryDark">#1976d2</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColor">#fcfcfc</item>
+        <item name="cardBackgroundColor">#ffffff</item>
+        <item name="indicatorColor">#4FEBFF</item>
+        <item name="textColor">#808080</item>
+        <item name="tintColor">#353535</item>
+        <item name="buttonColor">#2196f3</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+</resources>
