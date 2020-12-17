@@ -1,6 +1,7 @@
 package com.nurbk.ps.v1.image.ui.fragment
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.nurbk.ps.v1.image.MyApplication.Companion.hasNetwork
+import com.nurbk.ps.v1.image.R
 import com.nurbk.ps.v1.image.adapter.ImageAdapter
 import com.nurbk.ps.v1.image.databinding.FragmentImagesBinding
 import com.nurbk.ps.v1.image.model1.ImageListItem
@@ -24,6 +26,7 @@ import com.nurbk.ps.v1.image.ui.viewModel.ImagesViewModel
 import com.nurbk.ps.v1.image.util.Constants.QUERY_PAGE_SIZE
 import com.nurbk.ps.v1.image.util.OnScrollListener
 import com.nurbk.ps.v1.image.util.Resource
+import kotlinx.android.synthetic.main.fragment_details_image.*
 import kotlinx.android.synthetic.main.fragment_images.*
 import kotlinx.android.synthetic.main.menu_sheet.*
 import timber.log.Timber
@@ -42,9 +45,9 @@ class ImagesFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
     private var isLoading = false
     private var isLastPage = false
     private var isScrolling = false
-
+    private val dataSource = ArrayList<ImageListItem>()
     private val imageAdapter by lazy {
-        ImageAdapter(this, requireActivity())
+        ImageAdapter(this, requireActivity(), dataSource)
     }
 
     override fun onCreateView(
@@ -60,6 +63,7 @@ class ImagesFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
         return mBinding.root
     }
 
+    var imagsLiset = ArrayList<ImageListItem>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,7 +79,6 @@ class ImagesFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
         setUpRecyclerView()
 
         if (hasNetwork()) {
-            viewModel.deleteAll()
             viewModel.imageLiveData.observe(viewLifecycleOwner, Observer { response ->
                 Timber.d("$TAG onViewCreated->viewModel")
                 when (response) {
@@ -84,14 +87,19 @@ class ImagesFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
                         hideProgressBar()
                         response.data?.let { imageResponse ->
                             Timber.d("$TAG onViewCreated->Resource.Success->response.data")
-                            imageAdapter.differ.submitList(imageResponse.toList())
-
+//                            imageAdapter.dataSource.addAll(imageResponse.toList())
+                            dataSource.addAll(imageResponse)
+                            imageAdapter.notifyDataSetChanged()
                             val totalPages = imageResponse.totalPage / QUERY_PAGE_SIZE + 2
                             isLastPage = viewModel.imagePage == totalPages
                             if (isLastPage) {
                                 rvPhoto.setPadding(0, 0, 0, 0)
                             }
-                            viewModel.insert(imageResponse)
+
+                            imagsLiset.clear()
+                            imagsLiset.addAll(imageResponse)
+                            viewModel.deleteAll()
+                            viewModel.insert(imagsLiset)
                         }
                     }
                     is Resource.Error -> {
@@ -117,7 +125,9 @@ class ImagesFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
             })
         } else
             viewModel.getAllImage().observe(viewLifecycleOwner, Observer {
-                imageAdapter.differ.submitList(it)
+//                imageAdapter.dataSource.addAll(it)
+                dataSource.addAll(it)
+                imageAdapter.notifyDataSetChanged()
             })
 
 
@@ -146,23 +156,35 @@ class ImagesFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
 
     }
 
-    override fun onClickItemListener(data: ImageListItem, image: ImageView) {
+    override fun onClickItemListener(data: ImageListItem, image: ImageView, position: Int) {
         Timber.d("$TAG onViewCreated->  imageAdapter.setOnItemClickListener")
         (requireActivity() as MainActivity).bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_HIDDEN
 
-        val action =
-            ImagesFragmentDirections.actionImagesFragmentToImageDetailsFragment(data)
+        val bundle = Bundle()
 
 
-        findNavController()
-            .navigate(
-                action,
-                FragmentNavigator.Extras.Builder()
-                    .addSharedElements(
-                        mapOf(image to image.transitionName)
-                    ).build()
-            )
+//        val data = imageAdapter.differ.currentList
+
+        bundle.putInt("position", position)
+        bundle.putParcelableArrayList(
+            "images",
+            imagsLiset
+        )
+
+        findNavController().navigate(R.id.action_imagesFragment_to_imageDetailsFragment, bundle)
+//        val action =
+//            ImagesFragmentDirections.actionImagesFragmentToImageDetailsFragment(data)
+//
+//
+//        findNavController()
+//            .navigate(
+//                action,
+//                FragmentNavigator.Extras.Builder()
+//                    .addSharedElements(
+//                        mapOf(image to image.transitionName)
+//                    ).build()
+//            )
 
 
     }

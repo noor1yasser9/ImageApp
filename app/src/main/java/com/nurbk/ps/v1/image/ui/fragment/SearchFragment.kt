@@ -36,6 +36,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
 
@@ -51,7 +52,7 @@ class SearchFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
     private var position = -1
 
     private val imageAdapter by lazy {
-        ImageAdapter(this, requireActivity())
+        ImageAdapter(this, requireActivity(), ArrayList())
     }
 
     override fun onCreateView(
@@ -77,24 +78,27 @@ class SearchFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
         Timber.d("$TAG onViewCreated")
 
 
-//        var job: Job? = null
-//        etSearch.addTextChangedListener { editable ->
-//            job?.cancel()
-//            job = MainScope().launch {
-//                delay(SEARCH_NEWS_TIME_DELAY)
-//                editable?.let {
-//                    if (editable.toString().isNotEmpty()) {
-//                        viewModel.getSearchImage(editable.toString())
-//                        search = etSearch.text.toString()
-//                    }
-//                }
-//            }
-//        }
+        var job: Job? = null
+        etSearch.addTextChangedListener { editable ->
+            job?.cancel()
+            job = MainScope().launch {
+                delay(SEARCH_NEWS_TIME_DELAY)
+                editable?.let {
+                    if (editable.toString().isNotEmpty()) {
+                        viewModel.getSearchImage(editable.toString())
+                        search = etSearch.text.toString()
+                    }
+                }
+            }
+        }
+        setUpRecyclerView()
 
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
+                if (imageAdapter.dataSource.isNotEmpty())
+                    imageAdapter.dataSource.clear()
+
                 viewModel.getSearchImage(etSearch.text.toString())
-                setUpRecyclerView()
 
             }
 
@@ -111,7 +115,9 @@ class SearchFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { imageResponse ->
-                        imageAdapter.differ.submitList(imageResponse.results)
+//                        imageAdapter.differ.submitList(imageResponse.results)
+                        imageAdapter.dataSource = imageResponse.results
+                        imageAdapter.notifyDataSetChanged()
                         val totalPage = imageResponse.total_pages / 7
                         isLastPage = viewModel.searchImagePage == totalPage
                         if (isLastPage) {
@@ -170,21 +176,21 @@ class SearchFragment : Fragment(), ImageAdapter.OnClickMenuSheet {
             BottomSheetBehavior.STATE_EXPANDED
     }
 
-    override fun onClickItemListener(data: ImageListItem, image: ImageView) {
+    override fun onClickItemListener(data: ImageListItem, image: ImageView, position: Int) {
         Timber.d("$TAG onViewCreated->  imageAdapter.setOnItemClickListener")
         (requireActivity() as MainActivity).bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_HIDDEN
 
-        val action = SearchFragmentDirections.actionSearchFragmentToImageDetailsFragment(data)
+//        val action = SearchFragmentDirections.actionSearchFragmentToImageDetailsFragment(data)
 
-        findNavController()
-            .navigate(
-                action,
-                FragmentNavigator.Extras.Builder()
-                    .addSharedElements(
-                        mapOf(image to image.transitionName)
-                    ).build()
-            )
+//        findNavController()
+//            .navigate(
+//                action,
+//                FragmentNavigator.Extras.Builder()
+//                    .addSharedElements(
+//                        mapOf(image to image.transitionName)
+//                    ).build()
+//            )
 
     }
 

@@ -9,66 +9,67 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.nurbk.ps.v1.image.ui.fragment.FavoriteFragment"
-        android:label="Favorite"
-        >
+        android:label="Favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_imageDetailsFragment"
             app:destination="@id/imageDetailsFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"/>
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/imageDetailsFragment"
         android:name="com.nurbk.ps.v1.image.ui.fragment.ImageDetailsFragment"
-        android:label="ImageDetailsFragment" >
-
-        <argument android:name="ImageDetails"
-            app:argType="com.nurbk.ps.v1.image.model1.ImageListItem" />
+        android:label="ImageDetailsFragment">
+        <action
+            android:id="@+id/action_imageDetailsFragment_self"
+            app:destination="@id/imageDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/imagesFragment"
         android:name="com.nurbk.ps.v1.image.ui.fragment.ImagesFragment"
-        android:label="ImagesFragment" >
+        android:label="Images">
         <action
             android:id="@+id/action_imagesFragment_to_imageDetailsFragment"
             app:destination="@id/imageDetailsFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"
-            />
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.nurbk.ps.v1.image.ui.fragment.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="Search">
         <action
             android:id="@+id/action_searchFragment_to_imageDetailsFragment"
             app:destination="@id/imageDetailsFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"/>
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/videoFragment"
         android:name="com.nurbk.ps.v1.image.ui.fragment.VideoFragment"
-        android:label="VideoFragment" >
+        android:label="Videos">
         <action
             android:id="@+id/action_videoFragment_to_videoDialog2"
             app:destination="@id/videoDialog"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"
-            />
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/videoDialog"
         android:name="com.nurbk.ps.v1.image.ui.fragment.VideoDialog"
-        android:label="VideoDialog" >
+        android:label="Video">
         <argument
             android:name="video"
             app:argType="com.nurbk.ps.v1.image.model1.modelVideo.Video" />

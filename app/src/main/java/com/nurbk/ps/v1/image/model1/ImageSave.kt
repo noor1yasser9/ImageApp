@@ -9,9 +9,9 @@ import java.io.Serializable
 
 
 @Entity(
-    tableName = "ImageListItem"
+    tableName = "ImageSave"
 )
-class ImageListItem(
+data class ImageSave(
     val alt_description: String?,
     val color: String?,
     val created_at: String?,
@@ -26,11 +26,9 @@ class ImageListItem(
     val urls: Urls?,
     val user: User?,
     val width: Int?,
-    var status: Int = 0
-) : Parcelable {
     @PrimaryKey(autoGenerate = true)
-    var ids: Int? = 0
-
+var ids: Int
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -48,7 +46,6 @@ class ImageListItem(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readInt()
     ) {
-        ids = parcel.readValue(Int::class.java.classLoader) as? Int
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -63,22 +60,20 @@ class ImageListItem(
         parcel.writeString(promoted_at)
         parcel.writeString(updated_at)
         parcel.writeValue(width)
-        parcel.writeValue(ids)
-        parcel.writeInt(status)
+        parcel.writeInt(ids)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<ImageListItem> {
-        override fun createFromParcel(parcel: Parcel): ImageListItem {
-            return ImageListItem(parcel)
+    companion object CREATOR : Parcelable.Creator<ImageSave> {
+        override fun createFromParcel(parcel: Parcel): ImageSave {
+            return ImageSave(parcel)
         }
 
-        override fun newArray(size: Int): Array<ImageListItem?> {
+        override fun newArray(size: Int): Array<ImageSave?> {
             return arrayOfNulls(size)
         }
     }
-
 }

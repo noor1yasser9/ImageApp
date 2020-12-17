@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.nurbk.ps.v1.image.db.ImagesDatabase
 import com.nurbk.ps.v1.image.model1.ImageListItem
+import com.nurbk.ps.v1.image.model1.ImageSave
 import com.nurbk.ps.v1.image.model1.modelImage.ImageList
 import com.nurbk.ps.v1.image.model1.modelImage.ImageSearch
 import com.nurbk.ps.v1.image.model1.modelVideo.ItemVideo
@@ -41,6 +42,8 @@ class ImagesViewModel(application: Application) : AndroidViewModel(application) 
     var searchVideoPage = 1
     var searchVideoResponse: ItemVideo? = null
 
+    val imageSaveLiveData = MutableLiveData<ImageSave>()
+
     init {
         getResponseImages()
         getResponseVideo()
@@ -56,6 +59,13 @@ class ImagesViewModel(application: Application) : AndroidViewModel(application) 
     fun getSearchImage(searchQuery: String) = viewModelScope.launch {
         safeSearchImageCall(searchQuery)
     }
+
+        fun saveImage(image: ImageSave) = viewModelScope.launch {
+        imageRepository.saveImage(image)
+    }
+
+    fun getImageSave() =
+        imageRepository.getImageSave()
 
     fun getResponseVideo() = viewModelScope.launch {
         safeVideoCall()

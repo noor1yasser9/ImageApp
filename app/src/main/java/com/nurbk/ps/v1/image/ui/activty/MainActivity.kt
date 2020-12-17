@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -43,12 +44,14 @@ class MainActivity : AppCompatActivity() {
 
 
         setSupportActionBar(toolbar)
-        navController = findNavController(R.id.navHostFragment)
-        setupActionBarWithNavController(navController)
+            navController = findNavController(R.id.navHostFragment)
+        setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
         bottomBar.setupWithNavController(navController)
 
         bottomSheetBehavior = BottomSheetBehavior.from(menu_sheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        
 
         navHostFragment.findNavController()
             .addOnDestinationChangedListener { _, destination, _ ->

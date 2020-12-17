@@ -2,6 +2,7 @@ package com.nurbk.ps.v1.image.repository
 
 import com.nurbk.ps.v1.image.db.ImagesDatabase
 import com.nurbk.ps.v1.image.model1.ImageListItem
+import com.nurbk.ps.v1.image.model1.ImageSave
 import com.nurbk.ps.v1.image.network.RetrofitInstance
 
 class ImageRepository(val db: ImagesDatabase) {
@@ -27,4 +28,6 @@ class ImageRepository(val db: ImagesDatabase) {
 
     fun deleteAll() = db.getArticleDao().deleteAll()
 
+    suspend fun saveImage(image: ImageSave) = db.getArticleDao().saveImage(image)
+    fun getImageSave() = db.getArticleDao().getImageSave()
 }
