@@ -28,6 +28,6 @@ interface ImageApi {
         page: Int=1,
         @Query("query")
         query: String
-    ): Response<ImageSearch>
+        ): Response<ImageSearch>
 
 }

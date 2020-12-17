@@ -16,20 +16,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nurbk.ps.v1.image.R
 import com.nurbk.ps.v1.image.databinding.ItemPhotoBinding
 import com.nurbk.ps.v1.image.model1.ImageListItem
+import com.nurbk.ps.v1.image.model1.ImageSave
 import com.nurbk.ps.v1.image.util.Constants.loadImage
 
 
-class ImageAdapter(
+class SaveImageAdapter(
     val onClick: OnClickMenuSheet,
     val activity: Activity,
-    var dataSource: ArrayList<ImageListItem>
+    var dataSource: ArrayList<ImageSave>
 ) :
-    RecyclerView.Adapter<ImageAdapter.ImageHolder>() {
+    RecyclerView.Adapter<SaveImageAdapter.ImageHolder>() {
 
     inner class ImageHolder(val binding: ItemPhotoBinding) : RecyclerView.ViewHolder(binding.root)
 
 
-    fun getImageItemAt(position: Int): ImageListItem {
+    fun getImageItemAt(position: Int): ImageSave {
         return dataSource[position]
     }
 
@@ -84,7 +85,7 @@ class ImageAdapter(
 
     interface OnClickMenuSheet {
         fun onClickItemListener(position: Int)
-        fun onClickItemListener(data: ImageListItem, image: ImageView, position: Int)
+        fun onClickItemListener(data: ImageSave, image: ImageView, position: Int)
     }
 
     private fun convertDpToPixels(dp: Float, context: Context): Int {

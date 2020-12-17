@@ -1,5 +1,6 @@
 package com.nurbk.ps.v1.image.util
 
+import android.util.Log
 import android.widget.AbsListView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -28,6 +29,8 @@ class OnScrollListener(
         val shouldPaginate = isNotLoadingAndNotLastPage
                 && isAtLastItem
                 && isNotAtBeginning && isTotalMoreThenVisible
+
+        Log.e("ttttisAtLastItem","$isAtLastItem")
         Timber.d("$TAG  scrollListener->onScrolled->shouldPaginate $shouldPaginate")
         if (shouldPaginate) {
             onComplete()

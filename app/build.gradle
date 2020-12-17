@@ -63,7 +63,9 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     //CircleImage
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    // Kotlin
+    //viewpager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
     //RxJava
@@ -78,7 +80,6 @@ dependencies {
     implementation "androidx.room:room-rxjava2:2.2.5"
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:2.2.5"
-
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
@@ -95,8 +96,11 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
     //circleimageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
+    //HamidrezaAmz
     implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.15'
+    //sdp
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
 
 }
 

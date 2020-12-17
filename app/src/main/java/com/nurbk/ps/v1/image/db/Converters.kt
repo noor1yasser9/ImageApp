@@ -39,4 +39,18 @@ class Converters {
     fun factUserToGson(user: User): String? {
         return Gson().toJson(user)
     }
+
+
+
+//    @TypeConverter
+//    fun gsonToMap(json: String?): Map<String,HashMap<String,Int>> {
+//        return Gson().fromJson(json, object :TypeToken<Map<String, Map<String,Int>>>(){}.type)
+//    }
+//
+//    @TypeConverter
+//    fun mapToGson(user: User): String? {
+//        return Gson().toJson(user)
+//    }
+
+
 }

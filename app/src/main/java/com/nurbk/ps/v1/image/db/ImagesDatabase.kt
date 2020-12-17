@@ -8,11 +8,12 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nurbk.ps.v1.image.model1.ImageListItem
+import com.nurbk.ps.v1.image.model1.ImageSave
 
 
 @Database(
-    entities = [ImageListItem::class],
-    version =1
+    entities = [ImageListItem::class, ImageSave::class],
+    version = 1
 )
 @TypeConverters(Converters::class)
 abstract class ImagesDatabase : RoomDatabase() {
@@ -35,7 +36,7 @@ abstract class ImagesDatabase : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 ImagesDatabase::class.java,
-                "Photo"
+                "PhotoV1"
             ).build()
 
     }
