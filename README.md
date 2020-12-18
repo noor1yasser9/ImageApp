@@ -2,25 +2,25 @@
 
 
 ### I have programmed this app and I have used many new technical ways like as:
--Coroutine & rxjava
--lifecycle-viewmodel
--lifecycle-runtime
--navigation-fragment
--navigation-ui
--room Database & room-rxjava
--glide
--retrofit & adapter-rxjava2
--okhttp3
--dexter
--timber
--MagicalExoPlayer
--sdp & ssp
--viewpager2
--circleimageview
--roundedimageview
--material
+- Coroutine & rxjava
+- lifecycle-viewmodel
+- lifecycle-runtime
+- navigation-fragment
+- navigation-ui
+- room Database & room-rxjava
+- glide
+- retrofit & adapter-rxjava2
+- okhttp3
+- dexter
+- timber
+- MagicalExoPlayer
+- sdp & ssp
+- viewpager2
+- circleimageview
+- roundedimageview
+- material
  
- # Key things I've dealt with:
+ # I have programmed this app and I have used many new technical ways like as:
 - Clean Architecture
 - Google Architecture components
 - MVP/MVVM/MVI
