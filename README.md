@@ -1,7 +1,15 @@
 # ImageApp
 
 
-## I have programmed this app and I have used many new technical ways like as:
+# ✨ Features Project Android:
+- 100% Kotlin
+- MVVM architecture
+- Single activity
+- dataBinding 
+- download image & video
+- caching data
+
+# Used libraries
 - Coroutine & rxjava
 - lifecycle-viewmodel
 - lifecycle-runtime
