@@ -27,7 +27,7 @@
 - circleimageview
 - roundedimageview
 - material
- 
+  
 
 
 [![Screenshot 2020-12-18 135216](https://user-images.githubusercontent.com/41232970/102611812-57af1c80-4138-11eb-9b96-bbbe2292db45.png)](https://www.youtube.com/watch?v=YJatxotPYro)
