@@ -7,7 +7,7 @@
 - Single activity
 - dataBinding 
 - download image & video
-- caching data
+- caching data 
 
 # Used libraries
 - Coroutine & rxjava
